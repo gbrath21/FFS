@@ -1,15 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".fragments.ReportIssueFragment">
+    android:background="@color/white"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:id="@+id/iv_sp"
+        android:src="@drawable/baseline_person_outline_24"
+        android:scaleType="centerCrop"/>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=" Name"
+        android:layout_marginTop="4dp"
+        android:id="@+id/name_sp"
+        android:textSize="20sp"
+        android:background="@drawable/my_border"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=" Location"
+        android:background="@drawable/my_border"
+        android:id="@+id/web_sp"
+        android:textSize="20sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=" Email"
+        android:background="@drawable/my_border"
+        android:id="@+id/email_sp"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text=" Soldier Id"
+        android:background="@drawable/my_border"
+        android:id="@+id/bio_sp"
+        android:textSize="20sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/black"/>
+
+
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="show reportes"
+
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:id="@+id/btn_showreporter"/>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_centerInParent="true"
-        android:textSize="32dp"/>
+        android:visibility="gone"
+        android:id="@+id/rv_ru"
+        />
 
-</RelativeLayout>
+</LinearLayout>
