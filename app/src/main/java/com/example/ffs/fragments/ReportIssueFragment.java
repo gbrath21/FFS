@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -39,19 +40,23 @@ public class ReportIssueFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override public void onClick(View v)
                     {
+                        if(!issueName.getText().toString().equals("") && !Location.getText().toString().equals("") && !SoldierId.getText().toString().equals("")) {
+                            //get all the values
+                            String isName = issueName.getText().toString();
+                            String location = Location.getText().toString();
+                            String soldierId = SoldierId.getText().toString();
 
-                        //get all the values
-                        String isName = issueName.getText().toString();
-                        String location = Location.getText().toString();
-                        String soldierId = SoldierId.getText().toString();
+                            Issues issuesClass = new Issues(isName, location, soldierId);
 
-                        Issues issuesClass = new Issues(isName,location,soldierId);
-
-                        myRef.child(Calendar.getInstance().getTime().toString()+" - Soldier Id:"+soldierId).setValue(issuesClass);
-                        issueName.setText("");
-                        Location.setText("");
-                        SoldierId.setText("");
-
+                            myRef.child(Calendar.getInstance().getTime().toString() + " - Soldier Id:" + soldierId).setValue(issuesClass);
+                            issueName.setText("");
+                            Location.setText("");
+                            SoldierId.setText("");
+                        }
+                        else {
+                            Toast error = Toast.makeText(getContext(), "Please insert values", Toast.LENGTH_SHORT);
+                            error.show();
+                        }
                     }
                 });
         // Inflate the layout for this fragment
