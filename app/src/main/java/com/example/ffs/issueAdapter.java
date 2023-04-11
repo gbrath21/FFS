@@ -13,9 +13,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 
 // FirebaseRecyclerAdapter is a class provided by
 // FirebaseUI. it provides functions to bind, adapt and show
-// database contents in a Recycler View
+// database contents in a Recycler View(a form of a listview)
 public class issueAdapter extends FirebaseRecyclerAdapter<
-        issue, issueAdapter.personsViewholder> {
+        issue, issueAdapter.issuesViewholder> {
 
     public issueAdapter(
             @NonNull FirebaseRecyclerOptions<issue> options)
@@ -24,51 +24,51 @@ public class issueAdapter extends FirebaseRecyclerAdapter<
     }
 
     // Function to bind the view in Card view(here
-    // "person.xml") iwth data in
+    // "issue.xml") with data in
     // model class(here "person.class")
     @Override
     protected void
-    onBindViewHolder(@NonNull personsViewholder holder,
+    onBindViewHolder(@NonNull issuesViewholder holder,
                      int position, @NonNull issue model)
     {
 
-        // Add firstname from model class (here
-        // "person.class")to appropriate view in Card
-        // view (here "person.xml")
+        // Add issuename from model class (here
+        // "issue.class")to appropriate view in Card
+        // view (here "issue.xml")
         holder.issuename.setText(model.getIssuename());
 
         // Add lastname from model class (here
-        // "person.class")to appropriate view in Card
-        // view (here "person.xml")
+        // "issue.class")to appropriate view in Card
+        // view (here "issue.xml")
         holder.location.setText(model.getLocation());
 
         // Add age from model class (here
-        // "person.class")to appropriate view in Card
-        // view (here "person.xml")
+        // "issue.class")to appropriate view in Card
+        // view (here "issue.xml")
         holder.soldierid.setText(model.getSoldierid());
     }
 
     // Function to tell the class about the Card view (here
-    // "person.xml")in
+    // "issue.xml")in
     // which the data will be shown
     @NonNull
     @Override
-    public personsViewholder
+    public issuesViewholder
     onCreateViewHolder(@NonNull ViewGroup parent,
                        int viewType)
     {
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.issue, parent, false);
-        return new personsViewholder(view);
+        return new issuesViewholder(view);
     }
 
-    // Sub Class to create references of the views in Crad
-    // view (here "person.xml")
-    class personsViewholder
+    // Sub Class to create references of the views in Card
+    // view (here "issue.xml")
+    class issuesViewholder
             extends RecyclerView.ViewHolder {
         TextView issuename, location, soldierid;
-        public personsViewholder(@NonNull View itemView)
+        public issuesViewholder(@NonNull View itemView)
         {
             super(itemView);
 
