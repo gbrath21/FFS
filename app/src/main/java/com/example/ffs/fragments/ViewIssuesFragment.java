@@ -31,8 +31,7 @@ public class ViewIssuesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_view_issues, container, false);
         // Create a instance of the database and get
         // its reference
-        mbase
-                = FirebaseDatabase.getInstance().getReference();
+        mbase = FirebaseDatabase.getInstance().getReference();
 
         recyclerView = rootView.findViewById(R.id.recycler1);
 
@@ -43,9 +42,7 @@ public class ViewIssuesFragment extends Fragment {
         // It is a class provide by the FirebaseUI to make a
         // query in the database to fetch appropriate data
         FirebaseRecyclerOptions<issue> options
-                = new FirebaseRecyclerOptions.Builder<issue>()
-                .setQuery(mbase, issue.class)
-                .build();
+                = new FirebaseRecyclerOptions.Builder<issue>().setQuery(mbase, issue.class).build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
         adapter = new issueAdapter(options);
