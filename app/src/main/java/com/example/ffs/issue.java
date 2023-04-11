@@ -5,15 +5,15 @@ package com.example.ffs;
 public class issue
 {
     // Variable to store data corresponding
-    // to firstname keyword in database
+    // to issuename keyword in database
     private String issuename;
 
     // Variable to store data corresponding
-    // to lastname keyword in database
+    // to location keyword in database
     private String location;
 
     // Variable to store data corresponding
-    // to age keyword in database
+    // to soldierid keyword in database
     private String soldierid;
 
     // Mandatory empty constructor
