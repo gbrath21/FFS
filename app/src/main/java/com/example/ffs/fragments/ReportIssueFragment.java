@@ -40,15 +40,21 @@ public class ReportIssueFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override public void onClick(View v)
                     {
+                        //hvis ikke at alle felter er udfyldt får man en error message
+                        //hvis alle felter er udfyldte sendes det til firebase
                         if(!issueName.getText().toString().equals("") && !Location.getText().toString().equals("") && !SoldierId.getText().toString().equals("")) {
-                            //get all the values
+                            //henter værdiene fra alle felter
                             String isName = issueName.getText().toString();
                             String location = Location.getText().toString();
                             String soldierId = SoldierId.getText().toString();
-
+                            //kalder en ny instance af issues classen hvor værdier fra felterne bliver sat ind 
                             Issues issuesClass = new Issues(isName, location, soldierId);
-
+                            //sætter det ind i firebase og for at gøre at navnene på alle issuses er forskellige 
+                            //giver vi den navn udfra det tidspunkt der bliver tryket på knappen + soldier id'et
+                            //til sidst sættes værdierne af issuet til at være den issuesclass der blev lavet oven over.
                             myRef.child(Calendar.getInstance().getTime().toString() + " - Soldier Id:" + soldierId).setValue(issuesClass);
+                            
+                            //cleare tekstfelterne når det er sat ind i firebase
                             issueName.setText("");
                             Location.setText("");
                             SoldierId.setText("");
