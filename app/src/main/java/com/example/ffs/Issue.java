@@ -2,7 +2,7 @@
 // on your project name
 package com.example.ffs;
 
-public class issue
+public class Issue
 {
     // Variable to store data corresponding
     // to issuename keyword in database
@@ -15,34 +15,47 @@ public class issue
     // Variable to store data corresponding
     // to soldierid keyword in database
     private String soldierid;
+    private String imageurl;
+
+
 
     // Mandatory empty constructor
     // for use of FirebaseUI
-    public issue() {}
+    public Issue() {}
+
+    public Issue(String issuename, String location, String soldierid, String imageurl) {
+        this.issuename = issuename;
+        this.location = location;
+        this.soldierid = soldierid;
+        this.imageurl = imageurl;
+    }
 
     // Getter and setter method
     public String getIssuename()
     {
-        return issuename;
+        return this.issuename;
     }
-    public void setFirstname(String firstname)
+    public void setIssuename(String issuename)
     {
         this.issuename = issuename;
     }
     public String getLocation()
     {
-        return location;
+        return this.location;
     }
-    public void setLastname(String lastname)
+    public void setLocation(String location)
     {
         this.location = location;
     }
     public String getSoldierid()
     {
-        return soldierid;
+        return this.soldierid;
     }
-    public void setAge(String age)
+    public void setSoldierid(String soldierid)
     {
         this.soldierid = soldierid;
     }
+    public String getImageurl() {return imageurl;}
+
+    public void setImageurl(String imageurl) {this.imageurl = imageurl;}
 }

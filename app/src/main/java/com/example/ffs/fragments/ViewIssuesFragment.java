@@ -5,24 +5,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ffs.Issue;
 import com.example.ffs.R;
-import com.example.ffs.issue;
-import com.example.ffs.issueAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.example.ffs.RecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 public class ViewIssuesFragment extends Fragment {
     private RecyclerView recyclerView;
-    View rootview;
-    issueAdapter adapter; // Create Object of the Adapter class
-    DatabaseReference mbase; // Create object of the
+    RecyclerAdapter recyclerAdapter; // Create Object of the Adapter class
+    DatabaseReference myRef; // Create object of the
     // Firebase Realtime Database
+    private ArrayList<Issue> issueArrayList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,27 +38,57 @@ public class ViewIssuesFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_view_issues, container, false);
         // Create a instance of the database and get
         // its reference
-        mbase = FirebaseDatabase.getInstance().getReference();
 
         recyclerView = rootView.findViewById(R.id.recycler1);
-
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext()));
 
-        // It is a class provide by the FirebaseUI to make a
-        // query in the database to fetch appropriate data
-        FirebaseRecyclerOptions<issue> options
-                = new FirebaseRecyclerOptions.Builder<issue>().setQuery(mbase, issue.class).build();
-        // Connecting object of required Adapter class to
-        // the Adapter class itself
-        adapter = new issueAdapter(options);
-        // Connecting Adapter class with the Recycler view*/
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+        myRef = FirebaseDatabase.getInstance().getReference();
+
+        issueArrayList = new ArrayList<>();
+
+        ClearAll();
+
+        GetDataFromFirebase();
+
         return rootView;
     }
 
 
+    private void GetDataFromFirebase() {
+        Query query = myRef.child("issues");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ClearAll();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+
+                    Issue issues = new Issue();
+                    issues.setIssuename(snapshot.child("issuename").getValue().toString());
+                    issues.setLocation(snapshot.child("location").getValue().toString());
+                    issues.setSoldierid(snapshot.child("soldierid").getValue().toString());
+                    issues.setImageurl(snapshot.child("imageurl").getValue().toString());
+                    issueArrayList.add(issues);
+                }
+                recyclerAdapter = new RecyclerAdapter(getContext(), issueArrayList);
+                recyclerView.setAdapter(recyclerAdapter);
+                recyclerAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    private void ClearAll(){
+        if (issueArrayList != null){
+            issueArrayList.clear();
+            if(recyclerAdapter != null){
+                recyclerAdapter.notifyDataSetChanged();
+            }
+        }
+        issueArrayList = new ArrayList<>();
+    }
 }
 
