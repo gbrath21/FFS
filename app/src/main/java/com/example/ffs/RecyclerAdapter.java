@@ -45,7 +45,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         holder.soldierid.setText(issueArrayList.get(position).getSoldierid());
         //ImageView
         Glide.with(mContext).load(issueArrayList.get(position).getImageurl()).into(holder.imageView);
-
     }
 
     //Sørge for at alle værdier i listen bliver vist... Hvis man sætter den til return 3 vil den kun
@@ -65,7 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             issuename = itemView.findViewById(R.id.issuename);
             location = itemView.findViewById(R.id.location);
             soldierid = itemView.findViewById(R.id.soldierid);
-
         }
     }
 

@@ -78,8 +78,6 @@ public class ReportIssueFragment extends Fragment {
                 Location.setText("");
                 SoldierId.setText("");
                 imageView.setImageResource(R.drawable.baseline_image_24);
-                reportBtn.setEnabled(false);
-                reportBtn.setBackgroundColor(Color.parseColor("#D3D3D3"));
             }
         });
         reportBtn.setOnClickListener(

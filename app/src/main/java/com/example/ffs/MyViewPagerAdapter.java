@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.ffs.fragments.ProfileFragment;
 import com.example.ffs.fragments.ReportIssueFragment;
 import com.example.ffs.fragments.ViewIssuesFragment;
 
@@ -26,8 +25,6 @@ public class MyViewPagerAdapter extends FragmentStateAdapter {
                 return new ReportIssueFragment();
             case 1:
                 return new ViewIssuesFragment();
-            case 2:
-                return new ProfileFragment();
         }
     }
 
