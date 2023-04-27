@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -47,8 +48,6 @@ public class ReportIssueFragment extends Fragment {
     private final int PICK_IMAGE_REQUEST = 2;
     //firebase
     private StorageReference reference = FirebaseStorage.getInstance().getReference();
-    FirebaseStorage storage;
-    StorageReference storageReference;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
@@ -84,13 +83,13 @@ public class ReportIssueFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override public void onClick(View v)
                     {
+                        //henter værdiene fra alle felter
+                        String isName = issueName.getText().toString();
+                        String location = Location.getText().toString();
+                        String soldierId = SoldierId.getText().toString();
                         //hvis ikke at alle felter er udfyldt får man en error message
                         //hvis alle felter er udfyldte sendes det til firebase
-                        if(!issueName.getText().toString().equals("") && !Location.getText().toString().equals("") && !SoldierId.getText().toString().equals("")) {
-                            //henter værdiene fra alle felter
-                            String isName = issueName.getText().toString();
-                            String location = Location.getText().toString();
-                            String soldierId = SoldierId.getText().toString();
+                        if(!isName.equals("") && !location.equals("") && !soldierId.equals("")) {
                             // uriLink får sin værdi når uploadImage functionen er successful
                             String url = uriLink;
 
@@ -99,7 +98,9 @@ public class ReportIssueFragment extends Fragment {
                             //sætter det ind i firebase og for at gøre at navnene på alle issuses er forskellige
                             //giver vi den navn udfra det tidspunkt der bliver tryket på knappen + soldier id'et
                             //til sidst sættes værdierne af issuet til at være den issuesclass der blev lavet oven over.
-                            myRef.child("issues").child(Calendar.getInstance().getTime()+"Soldier ID:"+ soldierId).setValue(issueClass);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm:ss");
+                            myRef.child("issues").child(sdf.format(Calendar.getInstance().getTime())+" "+sdf1.format(Calendar.getInstance().getTime())+" Soldier ID:"+ soldierId).setValue(issueClass);
 
                             //Reseter Report issue siden når et issue er reported
                             issueName.setText("");
@@ -117,8 +118,7 @@ public class ReportIssueFragment extends Fragment {
                         }
                     }
                 });
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+
         // hvis der trykkes på imageView kører functionen SelectImage
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
