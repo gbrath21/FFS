@@ -41,8 +41,7 @@ public class ViewIssuesFragment extends Fragment {
 
         recyclerView = rootView.findViewById(R.id.recycler1);
         // To display the Recycler view linearly
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -63,7 +62,6 @@ public class ViewIssuesFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ClearAll();
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-
                     Issue issues = new Issue();
                     issues.setIssuename(snapshot.child("issuename").getValue().toString());
                     issues.setLocation(snapshot.child("location").getValue().toString());
