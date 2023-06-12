@@ -237,5 +237,3 @@ public class ReportIssueFragment extends Fragment {
                             });
                     }
 }
-
-
